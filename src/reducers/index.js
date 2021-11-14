@@ -6,6 +6,7 @@ import member from "../pages/Member/reducer";
 import profile from "../pages/Profile/reducer";
 import album from "../pages/Album/reducer";
 import collection from "../pages/Collection/reducer";
+import global from "./global";
 
 export default combineReducers({
   home,
@@ -14,4 +15,5 @@ export default combineReducers({
   profile,
   album,
   collection,
+  global,
 });

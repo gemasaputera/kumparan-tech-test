@@ -1,8 +1,20 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import menuItem from "../json/MenuItem.json";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as actions from "../reducers/action.global";
+import ToastNotification from "../components/ToastNotification";
 
-function Layouts({ children }) {
+const mapStateToProps = (state) => ({ ...state.global });
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+};
+
+function Layouts({ children, toast }) {
   const location = useLocation();
   const Navigation = () => {
     return (
@@ -41,10 +53,11 @@ function Layouts({ children }) {
   };
   return (
     <div className="h-screen relative">
+      {toast && <ToastNotification />}
       <main className="p-0 md:p-5">{children}</main>
       <Navigation />
     </div>
   );
 }
 
-export default Layouts;
+export default connect(mapStateToProps, mapDispatchToProps)(Layouts);

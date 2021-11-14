@@ -22,8 +22,14 @@ function Home(props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    props.actions.fetchPosts();
-    props.actions.fetchUsers();
+    let Mounted = true;
+    if (Mounted) {
+      props.actions.fetchPosts();
+      props.actions.fetchUsers();
+    }
+    return () => {
+      Mounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -72,14 +78,14 @@ function Home(props) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ paddingBottom: 65 }}>
       <section>
         <ListPost />
       </section>
       <AddPost handleClick={handleAdd} />
       {open && (
         <Modal open={open} onClose={() => setOpen(false)} auto>
-          <FormPost />
+          <FormPost dataPost={props.dataPost} />
         </Modal>
       )}
     </div>

@@ -76,7 +76,7 @@ function Post({ data, dataComment, loading, actions }) {
         </div>
         <div className="bg-gray-500 h-px my-4" />
         <CommentInput
-          id="comment"
+          dataComment={comments}
           type="text"
           placeholder="Add your comment..."
         />
