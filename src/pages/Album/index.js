@@ -22,6 +22,7 @@ function Album({ actions, dataPhoto, loading, album }) {
   const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     actions.fetchAlbums(params.albumId);
   }, []);
 

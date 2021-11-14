@@ -22,6 +22,7 @@ function Post({ data, dataComment, loading, actions }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     actions.fetchComments(params);
   }, []);
 
@@ -63,7 +64,7 @@ function Post({ data, dataComment, loading, actions }) {
       <div className="py-4">
         <div className="flex flex-col mb-4">
           <span
-            className="font-bold text-xl hover:underline"
+            className="font-bold text-xl cursor-pointer hover:underline"
             onClick={() => handleClick(data)}
           >
             {data.name}

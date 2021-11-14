@@ -4,6 +4,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actions from "./action";
 import PostItem from "../../components/PostItem";
+import AddPost from "../../components/AddPost";
+import Modal from "../../components/Modal";
+import FormPost from "../../components/FormPost";
 
 const mapStateToProps = (state) => ({ ...state.home });
 
@@ -16,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 function Home(props) {
   let navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     props.actions.fetchPosts();
@@ -63,11 +67,21 @@ function Home(props) {
     );
   }
 
+  const handleAdd = () => {
+    setOpen(true);
+  };
+
   return (
-    <div>
+    <div className="relative">
       <section>
         <ListPost />
       </section>
+      <AddPost handleClick={handleAdd} />
+      {open && (
+        <Modal open={open} onClose={() => setOpen(false)} auto>
+          <FormPost />
+        </Modal>
+      )}
     </div>
   );
 }

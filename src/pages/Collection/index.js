@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actions from "./action";
@@ -13,9 +14,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 function Collection({ actions, dataCollection, dataUser, loading }) {
+  const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     actions.fetchCollection();
     actions.fetchUsers();
   }, []);
@@ -33,7 +36,8 @@ function Collection({ actions, dataCollection, dataUser, loading }) {
   }, [dataCollection, dataUser]);
 
   const handleClick = (item) => {
-    console.log(`item`, item);
+    actions.saveAlbum(item);
+    navigate(`/album/${item.albumId}`);
   };
 
   const ListCollection = () => {

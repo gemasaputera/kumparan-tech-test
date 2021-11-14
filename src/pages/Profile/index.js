@@ -21,6 +21,7 @@ function Profile({ actions, dataAlbum, profile, loading }) {
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     actions.fetchUserAlbum(params.userId);
   }, []);
 

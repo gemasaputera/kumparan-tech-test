@@ -60,3 +60,14 @@ export const fetchUsers = () => {
       });
   };
 };
+
+export const saveAlbum = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: "STATE_ALBUM",
+      payload: {
+        album: data,
+      },
+    });
+  };
+};

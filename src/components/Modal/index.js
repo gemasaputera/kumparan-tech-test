@@ -13,7 +13,7 @@ function Modal({ open, children, onClose, auto }) {
       <div
         className={`relative top-20 ${
           auto ? "h-auto" : "h-4/5"
-        } w-11/12 lg:w-3/5 mx-auto p-3 border shadow-lg rounded-md bg-white mb-10`}
+        } w-11/12 lg:w-3/5 mx-auto p-3 border filter drop-shadow shadow-lg rounded-md bg-white mb-10`}
       >
         <div
           className="bg-white hover:bg-gray-200 p-1 rounded-full cursor-pointer absolute drop-shadow-md"
