@@ -1,0 +1,17 @@
+[
+  {
+    "name": "home",
+    "icon": "/icons/ic_home.svg",
+    "url": "/"
+  },
+  {
+    "name": "collection",
+    "icon": "/icons/ic_collection.svg",
+    "url": "/collection"
+  },
+  {
+    "name": "member",
+    "icon": "/icons/ic_users.svg",
+    "url": "/member"
+  }
+]
