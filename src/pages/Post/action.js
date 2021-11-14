@@ -35,3 +35,14 @@ export const fetchComments = (params) => {
       });
   };
 };
+
+export const saveProfile = (item) => {
+  return (dispatch) => {
+    dispatch({
+      type: "STATE_PROFILE",
+      payload: {
+        profile: item,
+      },
+    });
+  };
+};

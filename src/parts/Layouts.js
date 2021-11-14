@@ -7,7 +7,7 @@ function Layouts({ children }) {
   const Navigation = () => {
     return (
       <div
-        className="bg-white py-2 w-full border-t flex flex-row bottom-0 fixed justify-around"
+        className="bg-white filter drop-shadow py-2 w-full border-t flex flex-row bottom-0 fixed justify-around"
         style={{ height: 60 }}
       >
         {menuItem.map((item, i) => {

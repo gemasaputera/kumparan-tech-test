@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actions from "./action";
+import CollectionItem from "../../components/CollectionItem";
 
 const mapStateToProps = (state) => ({ ...state.collection });
 
@@ -44,27 +45,11 @@ function Collection({ actions, dataCollection, dataUser, loading }) {
       <div>
         {collections.map((collection) => {
           return (
-            <div
+            <CollectionItem
               key={collection.albumId}
-              className="cursor-pointer"
-              onClick={() => handleClick(collection)}
-            >
-              <div
-                className="bg-white hover:bg-gray-100 flex flex-col border p-5 mb-1"
-                style={{ height: 205 }}
-              >
-                <div className="flex justify-center items-center flex-1 ">
-                  <span className="font-bold text-2xl text-center">
-                    {collection.title}
-                  </span>
-                </div>
-                <div>
-                  <span className="font-bold mr-2 text-sm hover:underline">
-                    {collection.name}
-                  </span>
-                </div>
-              </div>
-            </div>
+              data={collection}
+              handleClick={handleClick}
+            />
           );
         })}
       </div>

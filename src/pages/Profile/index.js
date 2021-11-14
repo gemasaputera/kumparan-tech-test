@@ -3,6 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actions from "./action";
+import CollectionItem from "../../components/CollectionItem";
+import NavigationArrow from "../../components/NavigationArrow";
+import ProfileTop from "../../components/ProfileTop";
 
 const mapStateToProps = (state) => ({ ...state.profile });
 
@@ -34,7 +37,7 @@ function Profile({ actions, dataAlbum, profile, loading }) {
 
   const ListAlbums = () => {
     if (loading) {
-      return "Loading nich...";
+      return "Loading...";
     }
 
     if (albums.length === 0) {
@@ -45,13 +48,11 @@ function Profile({ actions, dataAlbum, profile, loading }) {
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {albums.map((album) => {
           return (
-            <div
+            <CollectionItem
               key={album.id}
-              className="p-4 border rounded text-center cursor-pointer hover:bg-gray-100"
-              onClick={() => handleClick(album)}
-            >
-              <p>{album.title}</p>
-            </div>
+              data={album}
+              handleClick={handleClick}
+            />
           );
         })}
       </section>
@@ -61,20 +62,25 @@ function Profile({ actions, dataAlbum, profile, loading }) {
   const AlbumSection = () => {
     return (
       <section className="mt-10 mb-4">
-        <h4 className="font-bold uppercase">Albums</h4>
+        <h4
+          className="font-bold uppercase mb-4"
+          style={{ marginLeft: 16, marginRight: 16 }}
+        >
+          Albums
+        </h4>
         <ListAlbums />
       </section>
     );
   };
 
   return (
-    <div>
-      <p className="font-bold text-2xl">{profile.name}</p>
-      <span>{profile.username}</span>
-      <p>{profile.email}</p>
-      <p>{profile.phone}</p>
-      <AlbumSection />
-    </div>
+    <>
+      <NavigationArrow title={profile.name} />
+      <div className="bg-white" style={{ marginTop: 55 }}>
+        <ProfileTop data={profile} />
+        <AlbumSection />
+      </div>
+    </>
   );
 }
 

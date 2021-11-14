@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as actions from "./action";
+import PostItem from "../../components/PostItem";
 
 const mapStateToProps = (state) => ({ ...state.home });
 
@@ -47,21 +48,7 @@ function Home(props) {
       <div>
         {posts.map((post) => {
           return (
-            <div
-              key={post.postId}
-              className="cursor-pointer"
-              onClick={() => handleClick(post)}
-            >
-              <div className="bg-white hover:bg-gray-100 border p-5 mb-1">
-                <div>
-                  <span className="font-bold mr-2 text-sm hover:underline">
-                    {post.name}
-                  </span>
-                  <span className="text-sm">@{post.username}</span>
-                </div>
-                {post.title}
-              </div>
-            </div>
+            <PostItem data={post} key={post.postId} handleClick={handleClick} />
           );
         })}
       </div>
