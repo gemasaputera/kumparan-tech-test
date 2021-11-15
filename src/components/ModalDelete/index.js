@@ -6,7 +6,7 @@ function ModalDelete({ title, handleClose, data, handleSubmit }) {
       class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800"
       style={{ backgroundColor: "rgba(0,0,0,.7)", zIndex: "51" }}
     >
-      <div class="bg-white rounded-lg w-1/5 md:w-2/5">
+      <div class="bg-white rounded-lg w-3/4 md:w-2/5">
         <div class="flex flex-col items-start p-4">
           <div class="flex justify-between items-center w-full mb-8">
             <div class="text-gray-900 font-bold text-lg">{title}</div>
