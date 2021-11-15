@@ -11,10 +11,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-function FormPost({ actions, dataPost, loadingPost }) {
+function FormPost({ actions, data, dataPost, loadingPost, mode }) {
   const [form, setForm] = useState({
-    title: "",
-    body: "",
+    title: mode !== "edit" ? "" : data.title,
+    body: mode !== "edit" ? "" : data.body,
   });
 
   const [disabled, setDisabled] = useState(true);
@@ -34,10 +34,14 @@ function FormPost({ actions, dataPost, loadingPost }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    actions.sendPost({ ...form, userId: 1 }, dataPost);
-    setTimeout(() => {
-      setForm({ title: "", body: "" });
-    }, 2000);
+    if (mode !== "edit") {
+      actions.sendPost({ ...form, userId: 1 }, dataPost);
+      setTimeout(() => {
+        setForm({ title: "", body: "" });
+      }, 2000);
+    } else {
+      actions.editPostDetail({ ...form }, data);
+    }
   };
 
   return (
@@ -68,7 +72,11 @@ function FormPost({ actions, dataPost, loadingPost }) {
             disabled={disabled}
             onClick={handleSubmit}
           >
-            {loadingPost ? "Loading ..." : "Post"}
+            {loadingPost
+              ? "Loading ..."
+              : mode !== "edit"
+              ? "Post"
+              : "Edit Post"}
           </button>
         </div>
       </form>

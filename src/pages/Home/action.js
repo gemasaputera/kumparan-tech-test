@@ -89,11 +89,18 @@ export const sendPost = (data, oldData) => {
     });
     fetch(options)
       .then((res) => {
-        console.log(`res`, res);
         dispatch({
           type: "STATE_HOME",
           payload: {
-            dataPost: [{ ...data, name: "test", username: "test" }, ...oldData],
+            dataPost: [
+              {
+                ...data,
+                name: "test",
+                username: "test",
+                id: Math.round(Math.random() * 9 * 100),
+              },
+              ...oldData,
+            ],
             loadingPost: false,
           },
         });
@@ -125,6 +132,59 @@ export const sendPost = (data, oldData) => {
   };
 };
 
+export const editPostDetail = (dataDetail, oldDataDetail) => {
+  return (dispatch) => {
+    const options = {
+      method: "PUT",
+      url: `https://jsonplaceholder.typicode.com/posts/${oldDataDetail.postId}`,
+      data: dataDetail,
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    dispatch({
+      type: "STATE_POST",
+      payload: {
+        loading: true,
+      },
+    });
+    fetch(options)
+      .then((res) => {
+        dispatch({
+          type: "STATE_POST",
+          payload: {
+            data: { ...oldDataDetail, ...dataDetail },
+            loading: false,
+          },
+        });
+        dispatch({
+          type: "STATE_GLOBAL",
+          payload: {
+            message: "Your post have been edited! ;)",
+            saverity: "success",
+            toast: true,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "STATE_POST",
+          payload: {
+            loading: false,
+          },
+        });
+        dispatch({
+          type: "STATE_GLOBAL",
+          payload: {
+            message: "Failed to edit ur post :(",
+            saverity: "error",
+            toast: true,
+          },
+        });
+      });
+  };
+};
+
 export const sendComment = (data, oldData) => {
   return (dispatch) => {
     const options = {
@@ -146,7 +206,14 @@ export const sendComment = (data, oldData) => {
         dispatch({
           type: "STATE_POST",
           payload: {
-            dataComment: [...oldData, { name: "test comment", ...data }],
+            dataComment: [
+              {
+                name: "test comment",
+                ...data,
+                id: Math.round(Math.random() * 9 * 100),
+              },
+              ...oldData,
+            ],
             loading: false,
           },
         });

@@ -14,7 +14,8 @@ function PostItem({ data, handleClick }) {
           </span>
           <span className="text-sm">@{data.username}</span>
         </div>
-        {data.title}
+        <p className="font-bold">{data.title}</p>
+        <p className="text-gray-400">{data.body}</p>
       </div>
     </div>
   );

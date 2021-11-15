@@ -35,7 +35,6 @@ function Album({ actions, dataPhoto, loading, album }) {
   const handleClick = (item) => {
     setOpen(true);
     setPhoto(item);
-    console.log(`item`, item);
   };
 
   const PhotoList = () => {
